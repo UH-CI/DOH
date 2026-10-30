@@ -14,6 +14,7 @@ layout = dbc.Container(
         html.P("Choose a page:"),
         dbc.ListGroup(
             [
+                dbc.ListGroupItem(html.A("Summary", href="/summary")),
                 dbc.ListGroupItem(html.A("Any Discharge Related to Substance Use", href="/discharges-su")),
                 dbc.ListGroupItem(html.A("Any Discharge Related to Mental Health Disorders", href="/discharges-mh")),
                 dbc.ListGroupItem(html.A("SUDORS", href="/sudors")),

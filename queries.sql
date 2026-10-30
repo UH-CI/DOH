@@ -232,6 +232,69 @@ FROM cares_calls_inbound
 WHERE Date IS NOT NULL;
 
 
+-- name: load_overview_wonder_deaths
+SELECT
+  year,
+  sum(deaths)
+FROM wonder_overview
+WHERE year IS NOT NULL and year < 2023
+group by year;
+
+-- name: load_overview_wonder_deaths_by_substance
+SELECT
+  year,
+  substance,
+  sum(deaths)
+FROM wonder_substance
+WHERE year IS NOT NULL and year < 2023
+group by year, substance
+order by year;
+
+-- name: load_overview_discharges_su
+SELECT
+  year,
+  sum(num_substance) AS total_substance
+FROM discharge_data_view_test
+WHERE year IS NOT NULL and year < 2023
+and num_substance > 0
+group by year
+order by year;
+
+-- name: load_overview_discharges_su_summary
+SELECT DISTINCT
+  REPLACE(TRIM(dx.diagnosis), 'Dissacociative', 'Dissociative') AS diagnosis,
+  CAST(demo.year AS INTEGER) AS year,
+  count(dx.diagnosis) as diagnosis_count
+FROM discharge_data_view_diagnosis dx
+INNER JOIN discharge_data_view_demographics_test demo
+  ON demo.record_id = dx.record_id
+WHERE dx.diagnosis IS NOT NULL
+  AND TRIM(dx.diagnosis) <> ''
+  and dx.diagnosis_type = 'su'
+  and year IS NOT NULL
+group by year, dx.diagnosis
+order by year;
+
+-- name: load_overview_discharges_su_cooccurring_summary
+WITH cooccur as 
+(select distinct record_id from discharge_data_view_test
+ where 
+	num_substance > 0
+	and num_mental > 0
+)
+SELECT 
+ REPLACE(TRIM(dx.diagnosis), 'Dissacociative', 'Dissociative') AS diagnosis,
+ CAST(demo.year AS INTEGER) AS year,
+ count(dx.diagnosis) AS diagnosis_count
+FROM discharge_data_view_diagnosis dx
+INNER JOIN cooccur co 
+ ON co.record_id = dx.record_id
+INNER JOIN discharge_data_view_demographics_test demo
+ ON demo.record_id = dx.record_id
+WHERE demo.year IS NOT NULL
+group by year, dx.diagnosis
+order by year;
+
 -- name: load_discharges_su_co_sud_mh
 WITH diag AS (
  SELECT DISTINCT
@@ -529,3 +592,21 @@ SELECT
 	Approved_visits as num_calls
 FROM BH808_Overview_CMO_Dispatches
 Order by Date;
+
+-- name: load_overview_discharges_su_with_substance
+WITH dx AS (
+  SELECT DISTINCT 
+    record_id, 
+    REPLACE(TRIM(diagnosis), 'Dissacociative', 'Dissociative') AS substance
+  FROM discharge_data_view_diag_su
+  WHERE diagnosis IS NOT NULL AND TRIM(diagnosis) <> ''
+)
+SELECT
+  CAST(m.year AS INTEGER) AS year,
+  dx.substance,
+  COUNT(DISTINCT dx.record_id) AS num_substance
+FROM dx
+JOIN discharge_data_view_demographics_test m ON m.record_id = dx.record_id
+WHERE m.year IS NOT NULL AND m.year < 2023
+GROUP BY m.year, dx.substance
+ORDER BY m.year, dx.substance;

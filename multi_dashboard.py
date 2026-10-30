@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 
 TAB_PATHS = {
     "/": "Substance Use Dashboards",
+    "/summary": "Summary Dashboard",
     "/adad": "ADAD Clients Served",
     "/adad-cooccurring": "ADAD Co-Occurring Clients Served",
     "/amhd": "AMHD Clients Served",
@@ -11,7 +12,7 @@ TAB_PATHS = {
     "/camhd": "CAMHD",
     "/camhd-cooccurring": "CAMHD with Co-Occurring MH and SU",
     "/cares-call-volume": "Hawaiʻi CARES Crisis Center Volume",
-    "/cares-statistics": "Hawai'i CARES 988 Statistics",
+    "/cares-statistics": "Hawaiʻi CARES 988 Statistics",
     "/crisis-mobile-outreach": "Referral Destinations for Crisis Mobile Outreach Clients",
     "/discharges-su": "Any Discharge Related to Substance Use",
     "/discharges-mh": "Any Discharge Related to Mental Health Disorders",
@@ -33,14 +34,10 @@ NAV_GROUPS = {
         ("/discharges-su", "Any Discharge Related to Substance Use"),
         ("/discharges-su-polysubstance", "Related to Polysubstance Use"),
         ("/discharges-cooccurring-su", "Related to co-occurring substance use and mental health disorders"),
-        ("/discharges-su-co-sud-mh", "Related to co-occurring SUD (primary) and MH disorder (secondary)"),
-        ("/discharges-su-co-mh-sud", "Related to co-occurring MH disorder (primary) and SUD (secondary)"),
     ],
     "mental_health_discharges": [
         ("/discharges-mh", "Any Discharge Related to Mental Health Disorders"),
         ("/discharges-cooccurring-mh", "Related to co-occurring mental health disorders and substance use"),
-        ("/discharges-mh-co-sud-mh", "Related to co-occurring SUD (primary) and MH disorder (secondary)"),
-        ("/discharges-mh-co-mh-sud", "Related to co-occurring MH disorder (primary) and SUD (secondary)"),
     ],
     "adad": [
         ("/adad", "ADAD Clients Served"),
