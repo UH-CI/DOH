@@ -174,6 +174,10 @@ def create_area_chart_card(
     else:
         plot_data = data.copy()
     
+    # Calculate total sum for annotation
+    total = plot_data[y_column].sum()
+    total_display = format_count_display(total)
+    
     # Create the area chart
     if group_column and group_column in plot_data.columns:
         fig = px.area(
@@ -205,11 +209,30 @@ def create_area_chart_card(
     if not group_column or group_column not in plot_data.columns:
         fig.update_layout(showlegend=False)
     
+    # Add total sum annotation in the center of the chart
+    fig.add_annotation(
+        text=f"<b>{total_display}</b>",
+        xref="paper",
+        yref="paper",
+        x=0.5,
+        y=0.5,
+        showarrow=False,
+        font=dict(size=32, color="rgba(66, 168, 148, 0.8)"),
+        bgcolor="rgba(255, 255, 255, 0.7)",
+        bordercolor="#42a894",
+        borderwidth=2,
+        borderpad=10,
+        align="center",
+    )
+    
     return dbc.Card(
         [
             dbc.CardBody(
                 [
-                    html.H5(title, className="card-title mb-3"),
+                    html.Div(
+                        html.H5(title, className="card-title mb-0"),
+                        style={"height": "60px", "overflow": "hidden", "display": "flex", "alignItems": "center"},
+                    ),
                     dcc.Graph(
                         id={"type": "summary-chart", "index": card_id},
                         figure=fig,
@@ -238,7 +261,7 @@ def create_area_chart_card(
             ),
         ],
         className="mb-3",
-        style={"height": "100%"},
+        style={"height": "460px"},
     )
 
 
@@ -266,11 +289,14 @@ def create_kpi_card(
         [
             dbc.CardBody(
                 [
-                    html.H5(title, className="card-title mb-3"),
+                    html.Div(
+                        html.H5(title, className="card-title mb-0"),
+                        style={"height": "60px", "overflow": "hidden", "display": "flex", "alignItems": "center"},
+                    ),
                     html.Div(
                         value,
                         className="h2 fw-bold mb-3",
-                        style={"textAlign": "center", "color": "#42a894"},
+                        style={"textAlign": "center", "color": "#42a894", "height": "200px", "display": "flex", "alignItems": "center", "justifyContent": "center"},
                     ),
                     dcc.Link(
                         html.Button(
@@ -294,7 +320,7 @@ def create_kpi_card(
             ),
         ],
         className="mb-3",
-        style={"height": "100%"},
+        style={"height": "460px"},
     )
 
 
