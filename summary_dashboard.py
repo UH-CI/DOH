@@ -200,9 +200,10 @@ def create_area_chart_card(
     # Apply standard styling
     apply_standard_line_layout(fig)
     fig.update_layout(
-        height=300,
+        height=175,
         hovermode="x unified",
-        margin=dict(b=60, t=20, l=40, r=20),
+        margin=dict(b=35, t=8, l=28, r=8),
+        font=dict(size=9),
     )
     
     # Remove legend for single-series charts
@@ -217,54 +218,55 @@ def create_area_chart_card(
         x=0.5,
         y=0.5,
         showarrow=False,
-        font=dict(size=32, color="rgba(66, 168, 148, 0.8)"),
+        font=dict(size=18, color="rgba(66, 168, 148, 0.8)"),
         bgcolor="rgba(255, 255, 255, 0.7)",
         bordercolor="#42a894",
-        borderwidth=2,
-        borderpad=10,
+        borderwidth=1,
+        borderpad=6,
         align="center",
     )
-    
+
     return dbc.Card(
         [
             dbc.CardBody(
-                [
-                    html.Div(
-                        html.H5(title, className="card-title mb-0"),
-                        style={"height": "70px", "overflow": "hidden", "display": "flex", "alignItems": "center", "padding": "0 8px"},
-                    ),
-                    dcc.Graph(
-                        id={"type": "summary-chart", "index": card_id},
-                        figure=fig,
-                        config={"displayModeBar": False},
-                        style={"flex": "1", "margin": "5px 0", "minHeight": "0"},
-                    ),
-                    dcc.Link(
-                        html.Button(
-                            button_text,
-                            className="btn w-100",
-                            style={
-                                "backgroundColor": button_color,
-                                "color": "white",
-                                "border": "none",
-                                "padding": "6px 12px",
-                                "borderRadius": "4px",
-                                "cursor": "pointer",
-                                "fontSize": "13px",
-                                "height": "40px",
-                                "marginTop": "5px",
-                            },
-                            title="click for more details",
+                html.Div(
+                    [
+                        html.H5(
+                            title,
+                            style={"height": "55px", "margin": "0", "fontSize": "14px",
+                                   "fontWeight": "500", "lineHeight": "1.2",
+                                   "overflow": "hidden", "display": "flex", "alignItems": "center"},
                         ),
-                        href=button_url,
-                        style={"textDecoration": "none", "display": "block"}
-                    ),
-                ],
-                style={"display": "flex", "flexDirection": "column", "height": "100%", "padding": "8px", "overflow": "hidden", "boxSizing": "border-box"}
+                        dcc.Graph(
+                            id={"type": "summary-chart", "index": card_id},
+                            figure=fig,
+                            config={"displayModeBar": False},
+                            style={"height": "175px"},
+                        ),
+                        dcc.Link(
+                            html.Button(
+                                button_text,
+                                style={
+                                    "backgroundColor": button_color,
+                                    "color": "white",
+                                    "border": "none",
+                                    "width": "100%",
+                                    "height": "38px",
+                                    "borderRadius": "4px",
+                                    "cursor": "pointer",
+                                    "fontSize": "13px",
+                                },
+                                title="click for more details",
+                            ),
+                            href=button_url,
+                            style={"textDecoration": "none", "display": "block"},
+                        ),
+                    ],
+                    className="summary-card-inner",
+                ),
             ),
         ],
-        className="mb-3",
-        style={"aspectRatio": "1"},
+        className="mb-3 summary-square-card",
     )
 
 
@@ -291,42 +293,44 @@ def create_kpi_card(
     return dbc.Card(
         [
             dbc.CardBody(
-                [
-                    html.Div(
-                        html.H5(title, className="card-title mb-0"),
-                        style={"height": "70px", "overflow": "hidden", "display": "flex", "alignItems": "center", "padding": "0 8px"},
-                    ),
-                    html.Div(
-                        value,
-                        className="h2 fw-bold",
-                        style={"textAlign": "center", "color": "#42a894", "flex": "1", "display": "flex", "alignItems": "center", "justifyContent": "center", "margin": "5px 0", "minHeight": "0"},
-                    ),
-                    dcc.Link(
-                        html.Button(
-                            button_text,
-                            className="btn w-100",
-                            style={
-                                "backgroundColor": button_color,
-                                "color": "white",
-                                "border": "none",
-                                "padding": "6px 12px",
-                                "borderRadius": "4px",
-                                "cursor": "pointer",
-                                "fontSize": "13px",
-                                "height": "40px",
-                                "marginTop": "5px",
-                            },
-                            title="click for more details",
+                html.Div(
+                    [
+                        html.H5(
+                            title,
+                            style={"height": "55px", "margin": "0", "fontSize": "14px",
+                                   "fontWeight": "500", "lineHeight": "1.2",
+                                   "overflow": "hidden", "display": "flex", "alignItems": "center"},
                         ),
-                        href=button_url,
-                        style={"textDecoration": "none", "display": "block"}
-                    ),
-                ],
-                style={"display": "flex", "flexDirection": "column", "height": "100%", "padding": "8px", "overflow": "hidden", "boxSizing": "border-box"}
+                        html.Div(
+                            value,
+                            style={"height": "175px", "display": "flex", "alignItems": "center",
+                                   "justifyContent": "center", "fontSize": "46px",
+                                   "fontWeight": "700", "color": "#42a894", "textAlign": "center"},
+                        ),
+                        dcc.Link(
+                            html.Button(
+                                button_text,
+                                style={
+                                    "backgroundColor": button_color,
+                                    "color": "white",
+                                    "border": "none",
+                                    "width": "100%",
+                                    "height": "38px",
+                                    "borderRadius": "4px",
+                                    "cursor": "pointer",
+                                    "fontSize": "13px",
+                                },
+                                title="click for more details",
+                            ),
+                            href=button_url,
+                            style={"textDecoration": "none", "display": "block"},
+                        ),
+                    ],
+                    className="summary-card-inner",
+                ),
             ),
         ],
-        className="mb-3",
-        style={"aspectRatio": "1"},
+        className="mb-3 summary-square-card",
     )
 
 

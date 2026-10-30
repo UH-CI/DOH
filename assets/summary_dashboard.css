@@ -1,0 +1,23 @@
+/* JS (summary_resize.js) sets width/height/transform on .summary-card-inner.
+   Everything else just needs the card to be square and clip overflow. */
+
+.summary-square-card {
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+/* Override Bootstrap card-body so it doesn't add padding or constrain the inner div */
+.summary-square-card > .card-body {
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+/* Fixed-size interior — JS scales this as one unit */
+.summary-card-inner {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 6px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
