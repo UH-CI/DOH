@@ -331,6 +331,7 @@ def update_dashboard(su, mh, county, city, year, age, sex, race_ethnicity, hawai
         )
 
         apply_standard_bar_layout(sub_bar)
+        sub_bar.update_layout(title="Discharges by Substance")
     else:
         sub_bar = px.bar()
 
@@ -365,6 +366,7 @@ def update_dashboard(su, mh, county, city, year, age, sex, race_ethnicity, hawai
         )
 
         apply_standard_bar_layout(mh_bar)
+        mh_bar.update_layout(title="Discharges by Mental Health Diagnosis")
     else:
         mh_bar = px.bar()
 
@@ -413,6 +415,7 @@ def update_dashboard(su, mh, county, city, year, age, sex, race_ethnicity, hawai
                 x=0,
             ),
         )
+        sub_line.update_layout(title="Yearly Discharges by Substance")
     else:
         sub_line = px.line()
 
@@ -461,6 +464,7 @@ def update_dashboard(su, mh, county, city, year, age, sex, race_ethnicity, hawai
                 x=0,
             ),
         )
+        mh_line.update_layout(title="Yearly Discharges by Mental Health Diagnosis")
     else:
         mh_line = px.line()
 

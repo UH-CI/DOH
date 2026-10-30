@@ -321,6 +321,7 @@ def update_dashboard(diagnosis, county, city, year, hawaii_residency, age, sex, 
             yaxis=dict(title_standoff=20),
             width=None,
         )
+        dx_bar.update_layout(title="Discharges by Mental Health Diagnosis")
     else:
         dx_bar = px.bar()
 
@@ -359,6 +360,7 @@ def update_dashboard(diagnosis, county, city, year, hawaii_residency, age, sex, 
         apply_standard_line_layout(
             diagnosis_line_fig,
         )
+        diagnosis_line_fig.update_layout(title="Yearly Discharges by Mental Health Diagnosis")
 
     else:
         diagnosis_line_fig = px.line()
@@ -395,6 +397,7 @@ def update_dashboard(diagnosis, county, city, year, hawaii_residency, age, sex, 
         apply_standard_line_layout(
             line_fig,
         )
+        line_fig.update_layout(title="Yearly Discharges by County")
         
     else:
         line_fig = px.line()
@@ -425,6 +428,7 @@ def update_dashboard(diagnosis, county, city, year, hawaii_residency, age, sex, 
         apply_standard_line_layout(
             age_line_fig,
         )
+        age_line_fig.update_layout(title="Yearly Discharges by Age Group")
 
     else:
         age_line_fig = px.line()
@@ -460,6 +464,7 @@ def update_dashboard(diagnosis, county, city, year, hawaii_residency, age, sex, 
             xaxis=dict(dtick=1),
             yaxis=dict(range=[0, max_y * 1.25 if max_y else 1]),
         )
+        sex_bar.update_layout(title="Yearly Discharges by Gender")
     else:
         sex_bar = px.bar()
 

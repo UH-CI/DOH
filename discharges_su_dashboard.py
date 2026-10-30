@@ -332,6 +332,7 @@ def update_dashboard(substance, county, city, year, hawaii_residency, age, sex, 
         )
 
         apply_standard_bar_layout(sub_bar)
+        sub_bar.update_layout(title="Discharges by Substance")
     else:
         sub_bar = px.bar()
 
@@ -370,6 +371,7 @@ def update_dashboard(substance, county, city, year, hawaii_residency, age, sex, 
         apply_standard_line_layout(
             substance_line_fig,
         )
+        substance_line_fig.update_layout(title="Yearly Discharges by Substance")
 
     
     else:
@@ -407,6 +409,7 @@ def update_dashboard(substance, county, city, year, hawaii_residency, age, sex, 
         apply_standard_line_layout(
             line_fig,
         )
+        line_fig.update_layout(title="Yearly Discharges by County")
         
     else:
         line_fig = px.line()
@@ -437,6 +440,7 @@ def update_dashboard(substance, county, city, year, hawaii_residency, age, sex, 
         apply_standard_line_layout(
             age_line_fig,
         )
+        age_line_fig.update_layout(title="Yearly Discharges by Age Group")
         
     else:
         age_line_fig = px.line()
@@ -472,6 +476,7 @@ def update_dashboard(substance, county, city, year, hawaii_residency, age, sex, 
             xaxis=dict(dtick=1),
             yaxis=dict(range=[0, max_y * 1.25 if max_y else 1]),
         )
+        sex_bar.update_layout(title="Yearly Discharges by Gender")
         # Keep segment labels inside stacked bars so top total annotations stay readable.
         sex_bar.update_traces(
             textposition="inside",
