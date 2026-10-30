@@ -231,7 +231,7 @@ def create_area_chart_card(
                 [
                     html.Div(
                         html.H5(title, className="card-title mb-0"),
-                        style={"height": "60px", "overflow": "hidden", "display": "flex", "alignItems": "center"},
+                        style={"height": "80px", "overflow": "visible", "display": "flex", "alignItems": "center"},
                     ),
                     dcc.Graph(
                         id={"type": "summary-chart", "index": card_id},
@@ -261,7 +261,7 @@ def create_area_chart_card(
             ),
         ],
         className="mb-3",
-        style={"height": "460px"},
+        style={"height": "480px"},
     )
 
 
@@ -291,7 +291,7 @@ def create_kpi_card(
                 [
                     html.Div(
                         html.H5(title, className="card-title mb-0"),
-                        style={"height": "60px", "overflow": "hidden", "display": "flex", "alignItems": "center"},
+                        style={"height": "80px", "overflow": "visible", "display": "flex", "alignItems": "center"},
                     ),
                     html.Div(
                         value,
@@ -320,7 +320,7 @@ def create_kpi_card(
             ),
         ],
         className="mb-3",
-        style={"height": "460px"},
+        style={"height": "480px"},
     )
 
 
