@@ -231,13 +231,13 @@ def create_area_chart_card(
                 [
                     html.Div(
                         html.H5(title, className="card-title mb-0"),
-                        style={"height": "80px", "overflow": "visible", "display": "flex", "alignItems": "center"},
+                        style={"height": "70px", "overflow": "hidden", "display": "flex", "alignItems": "center", "padding": "0 8px"},
                     ),
                     dcc.Graph(
                         id={"type": "summary-chart", "index": card_id},
                         figure=fig,
                         config={"displayModeBar": False},
-                        style={"height": "300px", "marginBottom": "10px"},
+                        style={"flex": "1", "margin": "5px 0", "minHeight": "0"},
                     ),
                     dcc.Link(
                         html.Button(
@@ -247,21 +247,24 @@ def create_area_chart_card(
                                 "backgroundColor": button_color,
                                 "color": "white",
                                 "border": "none",
-                                "padding": "8px 12px",
+                                "padding": "6px 12px",
                                 "borderRadius": "4px",
                                 "cursor": "pointer",
-                                "fontSize": "14px",
+                                "fontSize": "13px",
+                                "height": "40px",
+                                "marginTop": "5px",
                             },
                             title="click for more details",
                         ),
                         href=button_url,
                         style={"textDecoration": "none", "display": "block"}
                     ),
-                ]
+                ],
+                style={"display": "flex", "flexDirection": "column", "height": "100%", "padding": "8px", "overflow": "hidden", "boxSizing": "border-box"}
             ),
         ],
         className="mb-3",
-        style={"height": "480px"},
+        style={"aspectRatio": "1"},
     )
 
 
@@ -291,12 +294,12 @@ def create_kpi_card(
                 [
                     html.Div(
                         html.H5(title, className="card-title mb-0"),
-                        style={"height": "80px", "overflow": "visible", "display": "flex", "alignItems": "center"},
+                        style={"height": "70px", "overflow": "hidden", "display": "flex", "alignItems": "center", "padding": "0 8px"},
                     ),
                     html.Div(
                         value,
-                        className="h2 fw-bold mb-3",
-                        style={"textAlign": "center", "color": "#42a894", "height": "200px", "display": "flex", "alignItems": "center", "justifyContent": "center"},
+                        className="h2 fw-bold",
+                        style={"textAlign": "center", "color": "#42a894", "flex": "1", "display": "flex", "alignItems": "center", "justifyContent": "center", "margin": "5px 0", "minHeight": "0"},
                     ),
                     dcc.Link(
                         html.Button(
@@ -306,21 +309,24 @@ def create_kpi_card(
                                 "backgroundColor": button_color,
                                 "color": "white",
                                 "border": "none",
-                                "padding": "8px 12px",
+                                "padding": "6px 12px",
                                 "borderRadius": "4px",
                                 "cursor": "pointer",
-                                "fontSize": "14px",
+                                "fontSize": "13px",
+                                "height": "40px",
+                                "marginTop": "5px",
                             },
                             title="click for more details",
                         ),
                         href=button_url,
                         style={"textDecoration": "none", "display": "block"}
                     ),
-                ]
+                ],
+                style={"display": "flex", "flexDirection": "column", "height": "100%", "padding": "8px", "overflow": "hidden", "boxSizing": "border-box"}
             ),
         ],
         className="mb-3",
-        style={"height": "480px"},
+        style={"aspectRatio": "1"},
     )
 
 
