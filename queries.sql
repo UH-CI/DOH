@@ -170,14 +170,13 @@ JOIN sudors_data_view_demographics$ AS m
   ON m.incident_id = u.incident_id
 where m.year > 2020;  -- drop 2020 and earlier since they are partial years with different reporting rules
 
-
 -- name: load_wonder_overview
 SELECT
   year,
   county,
   deaths
 FROM wonder_overview
-WHERE year IS NOT NULL and year < 2023;
+WHERE year IS NOT NULL;
 
 
 -- name: load_wonder_substance
@@ -187,7 +186,7 @@ SELECT
   substance,
   deaths
 FROM wonder_substance
-WHERE year IS NOT NULL and year < 2023;
+WHERE year IS NOT NULL;
 
 
 -- name: load_wonder_race
@@ -197,7 +196,7 @@ SELECT
   race,
   deaths
 FROM wonder_race
-WHERE year IS NOT NULL and year < 2023;
+WHERE year IS NOT NULL;
 
 
 -- name: load_wonder_age_group
@@ -208,7 +207,7 @@ SELECT
   deaths,
   precedence
 FROM wonder_age_group
-WHERE year IS NOT NULL and year < 2023;
+WHERE year IS NOT NULL;
 
 
 -- name: load_wonder_gender
@@ -218,7 +217,7 @@ SELECT
   gender,
   deaths
 FROM wonder_gender
-WHERE year IS NOT NULL and year < 2023;
+WHERE year IS NOT NULL;
 
 
 -- name: load_cares_call_volume
@@ -237,7 +236,7 @@ SELECT
   year,
   sum(deaths)
 FROM wonder_overview
-WHERE year IS NOT NULL and year < 2023
+WHERE year IS NOT NULL
 group by year;
 
 -- name: load_overview_wonder_deaths_by_substance
@@ -246,7 +245,7 @@ SELECT
   substance,
   sum(deaths)
 FROM wonder_substance
-WHERE year IS NOT NULL and year < 2023
+WHERE year IS NOT NULL
 group by year, substance
 order by year;
 
@@ -255,7 +254,7 @@ SELECT
   year,
   sum(num_substance) AS total_substance
 FROM discharge_data_view_test
-WHERE year IS NOT NULL and year < 2023
+WHERE year IS NOT NULL
 and num_substance > 0
 group by year
 order by year;
@@ -607,6 +606,6 @@ SELECT
   COUNT(DISTINCT dx.record_id) AS num_substance
 FROM dx
 JOIN discharge_data_view_demographics_test m ON m.record_id = dx.record_id
-WHERE m.year IS NOT NULL AND m.year < 2023
+WHERE m.year IS NOT NULL
 GROUP BY m.year, dx.substance
 ORDER BY m.year, dx.substance;

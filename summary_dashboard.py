@@ -204,6 +204,7 @@ def create_area_chart_card(
         hovermode="x unified",
         margin=dict(b=35, t=8, l=28, r=8),
         font=dict(size=9),
+        xaxis=dict(tickangle=-45, automargin=True),
     )
     
     # Remove legend for single-series charts
