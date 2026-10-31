@@ -196,7 +196,7 @@ def layout():
         [
             html.Div(
                 [
-                    html.H5("Number of Clients Served", id="adad-bar-chart-title", className="plot-card-header mb-2"),
+                    html.H5("Number of Clients Served", id="adad-bar-chart-title", className="plot-card-header mb-2", style={"display": "none"}),
                     dcc.Graph(
                         id="adad-bar-chart",
                         style={"width": "100%"},
@@ -208,7 +208,7 @@ def layout():
             ),
             html.Div(
                 [
-                    html.H5("Clients Served by Modality and Year (Top 10 Modalities)", className="plot-card-header mb-2"),
+                    html.H5("Clients Served by Modality and Year (Top 10 Modalities)", className="plot-card-header mb-2", style={"display": "none"}),
                     dcc.Graph(
                         id="adad-modality-line-chart",
                         style={"width": "100%", "height": "520px"},
@@ -220,7 +220,7 @@ def layout():
             ),
             html.Div(
                 [
-                    html.H5("Clients Served by Island and Year", className="plot-card-header mb-2"),
+                    html.H5("Clients Served by Island and Year", className="plot-card-header mb-2", style={"display": "none"}),
                     dcc.Graph(
                         id="adad-county-line-chart",
                         style={"width": "100%", "height": "520px"},
@@ -383,6 +383,7 @@ def update_dashboard(view, sel_years, sel_months, sel_modalities, sel_counties, 
         customdata=grouped[["label"]],
         hovertemplate="%{y}: %{customdata[0]}<extra></extra>",
     )
+    bar_fig.update_layout(title="Number of Clients Served")
 
     top_modalities = (
         dff.dropna(subset=["modality"])
@@ -428,6 +429,10 @@ def update_dashboard(view, sel_years, sel_months, sel_modalities, sel_counties, 
         modality_line_fig,
         xaxis=dict(dtick=1),
     )
+    modality_line_fig.update_layout(title="Clients Served by Modality and Year")
+    modality_line_fig.update_traces(
+        hovertemplate="%{fullData.name}<br>Year: %{x}<br>Clients: %{y:,}<extra></extra>"
+    )
 
     county_line_grouped = (
         dff.groupby(["year", "county"], as_index=False)["client_id"]
@@ -456,10 +461,7 @@ def update_dashboard(view, sel_years, sel_months, sel_modalities, sel_counties, 
         county_line_fig,
         xaxis=dict(dtick=1),
     )
-
-    county_line_fig.update_traces(
-        hovertemplate="%{fullData.name}<br>Year: %{x}<br>Clients: %{y:,}<extra></extra>"
-    )
+    county_line_fig.update_layout(title="Clients Served by Island and Year")
 
     # Tables
     # ---------- Helper for the summary tables ----------

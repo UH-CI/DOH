@@ -173,11 +173,11 @@ def layout():
 
     # Center column: the main line and bar charts.
     center_col = dbc.Col([
-        graph_block("su-primary-bar", "Discharges by Substance"),
+        graph_block("su-primary-bar", ""),
         html.P("Bar chart showing discharges by substance.", className="visually-hidden"),
-        graph_block("sud-mh-primary-bar", "Discharges by Mental Health Diagnosis"),
+        graph_block("sud-mh-primary-bar", ""),
         html.P("Bar chart showing discharges by mental health diagnosis.", className="visually-hidden"),
-        graph_block("su-primary-line", "Yearly Discharges by Substance", line_h),
+        graph_block("su-primary-line", "", line_h),
         html.P("Line chart showing yearly discharges by substance.", className="visually-hidden"),
     ], xs=12, md=6)
 

@@ -93,6 +93,7 @@ def _line_chart(grouped, period_title, chart_title="Occupancy Rate"):
         ),
         legend=dict(x=0.5, xanchor="center"),
     )
+    fig.update_layout(title="Licensed Crisis Residential Shelters Occupancy Rates")
 
     # 2. Force our X-Axis and Hover settings SECOND (so they can't be overwritten)
     if period_title == "Date of Service":
@@ -150,7 +151,7 @@ def build_layout():
         [
             html.Div(
                 [
-                    html.H5("Licensed Crisis Residential Shelters Occupancy Rates", id="lcrf-facility-chart-title", className="plot-card-header mb-2 text-center"),
+                    html.H5("Licensed Crisis Residential Shelters Occupancy Rates", id="lcrf-facility-chart-title", className="plot-card-header mb-2 text-center", style={"display": "none"}),
                     html.H6("Occupancy Rate = Average of Daily Occupancy Rates.  These facilities only host adults", id="lcrf-facility-chart-subtitle", className="plot-card-header mb-2 text-center"),
 
                     dcc.Graph(

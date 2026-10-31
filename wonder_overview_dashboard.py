@@ -100,10 +100,7 @@ def graph_block(base_id: str, title_text: str, height_px: str | None = None):
     """
     return html.Div(
         [
-            # Header row with the plot title.
-            html.H5(title_text, id=f"{base_id}-title", className="plot-card-header mb-2"),
-
-            # The actual graph. Modebar (tools) is always on now.
+            *([html.H5(title_text, id=f"{base_id}-title", className="plot-card-header mb-2")] if title_text else []),
             dcc.Graph(
                 id=base_id,
                 style=({"height": height_px, "width": "100%"} if height_px else {"width": "100%"}),
@@ -210,11 +207,11 @@ def layout_for(
     center_col = dbc.Col(
         [
             dbc.Row([
-                graph_block("wonder-line-deaths", "Deaths by Calendar Year", line_h),
+                graph_block("wonder-line-deaths", "", line_h),
                 html.P("Line chart showing deaths by calendar year.", className="visually-hidden"),
             ]),
             dbc.Row([
-                graph_block("wonder-bar-deaths", "Deaths by County"),
+                graph_block("wonder-bar-deaths", ""),
                 html.P("Bar chart showing deaths by county.", className="visually-hidden"),
             ]),
         ],
@@ -338,9 +335,7 @@ def update_dashboard(county, year):
         )
 
         apply_standard_line_layout(year_line)
-
-    else:
-        year_line = px.line()
+        year_line.update_layout(title="Deaths by Calendar Year")
 
     # ---------- Bar chart: Deaths by Substance ----------
     if {"county", "year"}.issubset(dff.columns):
@@ -368,9 +363,7 @@ def update_dashboard(county, year):
         apply_standard_single_series_bar_trace(county_bar)
 
         apply_standard_bar_layout(county_bar, yaxis=dict(autorange="reversed"))
-
-    else:
-        county_bar = px.bar()
+        county_bar.update_layout(title="Deaths by County")
 
     # Return all the updated visuals and tables to Dash
     return (

@@ -78,7 +78,7 @@ def layout():
                         # FIX: Replaced graph_block to allow for centering the title
                         html.H3(
                             "Referral Destinations for Crisis Mobile Outreach Clients (past 6 months)",
-                            style={'textAlign': 'center'}
+                            style={'textAlign': 'center', 'display': 'none'}
                         ),
                         dcc.Graph(id="cmo-referral-bar"),
                         html.P(
@@ -163,5 +163,6 @@ def update_dashboard(_):
         customdata=dff[["cnt_display"]],
         hovertemplate="%{y}: %{x:.1f}% (%{customdata[0]} clients)<extra></extra>",
     )
+    fig.update_layout(title="Referral Destinations for Crisis Mobile Outreach")
 
     return fig

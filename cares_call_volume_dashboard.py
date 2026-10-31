@@ -181,7 +181,7 @@ def layout():
         [
             html.Div(
                 [
-                    html.H5("Number of Calls", id="cares-bar-chart-title", className="plot-card-header mb-2"),
+                    html.H5("Number of Calls", id="cares-bar-chart-title", className="plot-card-header mb-2", style={"display": "none"}),
                     dcc.Graph(
                         id="cares-bar-chart",
                         style={"width": "100%"},
@@ -306,8 +306,7 @@ def update_dashboard(view, sel_years, sel_months, sel_crisis):
         height=chart_height,
     )
     apply_standard_single_series_bar_trace(fig)
-
-    # --- Crisis line table ---
+    fig.update_layout(title="Number of Calls")
     crisis_totals = (
         dff.groupby("origin_of_call", as_index=False)["count_of_users"]
         .sum()

@@ -180,15 +180,15 @@ def layout():
     # Center column: the main line and bar charts.
     center_col = dbc.Col(
         [
-            graph_block("bar-diagnoses-mh", "Discharges by Mental Health Diagnosis"),
+            graph_block("bar-diagnoses-mh", ""),
             html.P("Bar chart showing discharges by mental health diagnosis.", className="visually-hidden"),
-            graph_block("diagnosis-year-lines-mh", "Yearly Discharges by Mental Health Diagnosis", line_h),
+            graph_block("diagnosis-year-lines-mh", "", line_h),
             html.P("Line chart showing yearly discharges by mental health diagnosis.", className="visually-hidden"),
-            graph_block("county-year-lines-mh", "Yearly Discharges by County", line_h),
+            graph_block("county-year-lines-mh", "", line_h),
             html.P("Line chart showing yearly discharges by county.", className="visually-hidden"),
-            graph_block("age-year-lines-mh", "Yearly Discharges by Age Group", line_h),
+            graph_block("age-year-lines-mh", "", line_h),
             html.P("Line chart showing yearly discharges by age group.", className="visually-hidden"),
-            graph_block("sex-year-stacked-mh", "Yearly Discharges by Gender", bar_h),
+            graph_block("sex-year-stacked-mh", "", bar_h),
             html.P("Stacked bar chart showing yearly discharges by gender.", className="visually-hidden"),
         ],
         xs=12, md=6

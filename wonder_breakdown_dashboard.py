@@ -104,8 +104,7 @@ def graph_block(base_id: str, title_text: str, height_px: str | None = None):
     """
     return html.Div(
         [
-            # Header row with the plot title.
-            html.H5(title_text, id=f"{base_id}-title", className="plot-card-header mb-2"),
+            *([html.H5(title_text, id=f"{base_id}-title", className="plot-card-header mb-2")] if title_text else []),
 
             # The actual graph. Modebar (tools) is always on now.
             dcc.Graph(
@@ -230,19 +229,19 @@ def layout_for(
     center_col = dbc.Col(
         [
             dbc.Row([
-                graph_block("wonder-year-substance-line", "Yearly Deaths by Substance (All Years)"),
+                graph_block("wonder-year-substance-line", ""),
                 html.P("Line chart showing yearly deaths by substance across all years for the selected county.", className="visually-hidden"),
             ]),
             dbc.Row([
-                graph_block("wonder-substance-deaths", "Deaths by Substance"),
+                graph_block("wonder-substance-deaths", ""),
                 html.P("Bar chart showing deaths by substance.", className="visually-hidden"),
             ]),
             dbc.Row([
-                graph_block("wonder-race-deaths", "Deaths by Race"),
+                graph_block("wonder-race-deaths", ""),
                 html.P("Bar chart showing deaths by race.", className="visually-hidden"),
             ]),
             dbc.Row([
-                graph_block("wonder-age-group-deaths", "Deaths by Age Group"),
+                graph_block("wonder-age-group-deaths", ""),
                 html.P("Bar chart showing deaths by age group.", className="visually-hidden"),
             ]),
         ],
@@ -461,8 +460,7 @@ def update_dashboard(county, year):
             xaxis=dict(type="linear", tickmode="linear", dtick=1),
             yaxis=dict(rangemode="tozero"),
         )
-    else:
-        year_substance_line = px.line()
+        year_substance_line.update_layout(title="Yearly Deaths by Substance (All Years)")
 
     # ---------- Bar chart: Deaths by Substance ----------
     if {"county", "year", "substance"}.issubset(dff_substance.columns):
@@ -489,9 +487,7 @@ def update_dashboard(county, year):
             xaxis=dict(rangemode="tozero"),
             yaxis=dict(autorange="reversed"),
         )
-
-    else:
-        sub_bar = px.bar()
+        sub_bar.update_layout(title="Deaths by Substance")
 
 
     # ---------- Bar chart: Deaths by Race ----------
@@ -515,9 +511,7 @@ def update_dashboard(county, year):
         apply_standard_single_series_bar_trace(race_bar)
 
         apply_standard_bar_layout(race_bar, yaxis=dict(autorange="reversed"))
-
-    else:
-        race_bar = px.bar()
+        race_bar.update_layout(title="Deaths by Race")
 
     # ---------- Bar chart: Deaths by Age Group ----------
     if {"county", "year", "age_group"}.issubset(dff_age_group.columns):
@@ -542,9 +536,7 @@ def update_dashboard(county, year):
         apply_standard_single_series_bar_trace(age_group_bar)
 
         apply_standard_bar_layout(age_group_bar, yaxis=dict(autorange="reversed"))
-
-    else:
-        age_group_bar = px.bar()
+        age_group_bar.update_layout(title="Deaths by Age Group")
 
 
     # ---------- Helper for the summary tables ----------

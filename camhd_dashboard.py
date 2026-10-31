@@ -160,7 +160,7 @@ def layout():
         [
             html.Div(
                 [
-                    html.H5("Number of Clients Served", id="camhd-bar-chart-title", className="plot-card-header mb-2"),
+                    html.H5("Number of Clients Served", id="camhd-bar-chart-title", className="plot-card-header mb-2", style={"display": "none"}),
                     dcc.Graph(
                         id="camhd-bar-chart",
                         style={"width": "100%"},
@@ -278,5 +278,6 @@ def update_dashboard(view, sel_years, start_date, end_date):
     )
     apply_standard_single_series_bar_trace(bar_fig)
     bar_fig.update_traces(hovertemplate="%{y}: %{text}<extra></extra>")
+    bar_fig.update_layout(title="Number of Clients Served")
 
     return bar_fig, format_count_display(total_clients)

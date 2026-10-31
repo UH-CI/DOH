@@ -150,10 +150,10 @@ def layout():
     # Center column: the main line, bar, and pie charts.
     center_col = dbc.Col(
         [
-            graph_block("sudors-bar", "Deaths by Substance"),
+            graph_block("sudors-bar", ""),
             html.P("Bar chart showing deaths by substance.", className="visually-hidden"),
 
-            graph_block("sudors-line", "Yearly Deaths by Substance", line_h),
+            graph_block("sudors-line", "", line_h),
             html.P("Line chart showing deaths by substance over time.", className="visually-hidden"),
         ],
         xs=12, md=6
@@ -286,6 +286,7 @@ def update_dashboard(substance, homeless, sex, age, race, year):
 
         apply_standard_single_series_bar_trace(sud_bar)
         apply_standard_bar_layout(sud_bar, xaxis=dict(rangemode="tozero"))
+        sud_bar.update_layout(title="Deaths by Substance")
     else:
         sud_bar = px.bar()
 
@@ -322,9 +323,10 @@ def update_dashboard(substance, homeless, sex, age, race, year):
         apply_standard_line_layout(
             line_fig,
         )
-
+        line_fig.update_layout(title="Yearly Deaths by Substance")
     else:
         line_fig = px.line()
+        line_fig.update_layout(title="Yearly Deaths by Substance")
 
     
     # ---------- Helper for the summary tables ----------

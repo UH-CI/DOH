@@ -200,7 +200,7 @@ def layout():
         [
             html.Div(
                 [
-                    html.H5("Number of AMHD Consumers", id="amhd-bar-chart-title", className="plot-card-header mb-2"),
+                    html.H5("Number of AMHD Consumers", id="amhd-bar-chart-title", className="plot-card-header mb-2", style={"display": "none"}),
                     dcc.Graph(
                         id="amhd-bar-chart",
                         style={"width": "100%"},
@@ -349,8 +349,7 @@ def update_dashboard(view, sel_years, sel_service_categories):
     )
     apply_standard_single_series_bar_trace(bar_fig)
     bar_fig.update_traces(hovertemplate="%{y}: %{text}<extra></extra>")
-
-    # --- 4. Summary Table Generation (Independent of View) ---
+    bar_fig.update_layout(title="Number of AMHD Consumers")    # --- 4. Summary Table Generation (Independent of View) ---
     if no_filters and not amhd_kpi_category_rows.empty:
         table_df = amhd_kpi_category_rows.rename(
             columns={

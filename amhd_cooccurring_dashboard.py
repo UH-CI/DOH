@@ -168,7 +168,7 @@ def layout():
     left_col = make_left_sidebar(kpi_card, reset_button, filters_card, view_toggle_card=view_toggle_card, helper_text=amhd_sidebar_text, last_updated_value=last_updated_value, xs=12, md=3)
     center_col = dbc.Col([
         html.Div([
-            html.H5("Number of AMHD Co-Occurring Consumers", id="amhd-cooccurring-bar-chart-title", className="plot-card-header mb-2"),
+            html.H5("Number of AMHD Co-Occurring Consumers", id="amhd-cooccurring-bar-chart-title", className="plot-card-header mb-2", style={"display": "none"}),
             dcc.Graph(id="amhd-cooccurring-bar-chart", style={"width": "100%"}, config={"displayModeBar": True, "displaylogo": False}),
         ], className="mb-4", style={"overflow": "visible"}),
     ], xs=12, md=6)
@@ -253,6 +253,7 @@ def update_dashboard(view, sel_years, sel_service_categories):
     apply_standard_bar_layout(bar_fig, xaxis=dict(title="Number of AMHD Co-Occurring Consumers"), yaxis=dict(title=period_title, type="category", categoryorder="array", categoryarray=y_order, autorange=True), height=bar_height)
     apply_standard_single_series_bar_trace(bar_fig)
     bar_fig.update_traces(hovertemplate="%{y}: %{text}<extra></extra>")
+    bar_fig.update_layout(title="Number of AMHD Co-Occurring Consumers")
 
     # --- 4. Summary Table Generation ---
     if no_filters and not amhd_cooccurring_kpi_category_rows.empty:
