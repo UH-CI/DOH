@@ -429,7 +429,7 @@ row3_col1_data.columns = ["year", "count"]
 
 row3_col2_data = df_cooccurring[
     df_cooccurring["diagnosis"].str.contains(
-        "Schizophrenia, Schizotypal, Delusional, or Other Non-mood Psychotic Disorders",
+        "Schizophrenia, Schizotypal, Delusional, or Other Non-Mood Psychotic Disorder",
         case=False,
         na=False,
         regex=False
@@ -440,7 +440,7 @@ row3_col2_data.columns = ["year", "count"]
 
 row3_col3_data = df_cooccurring[
     df_cooccurring["diagnosis"].str.contains(
-        "Pervasive or Specific Developmental Disorders",
+        "Pervasive or Specific Developmental Disorder",
         case=False,
         na=False,
         regex=False
